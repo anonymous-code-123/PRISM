@@ -1,0 +1,47 @@
+
+work_dir: ./work_dir/mtu-base/xsub/unik_joint
+model_saved_name: ./runs/mtu-base/mtu_cs_unik_joint
+# feeder
+feeder: feeders.feeder.Feeder
+train_feeder_args:
+  data_path: ./data/mtu100+/xsub/train_data_joint.npy
+  label_path: ./data/mtu100+/xsub/train_label.pkl
+  debug: False
+  random_choose: False
+  random_shift: False
+  random_move: False
+  window_size: -1
+  normalization: False
+
+test_feeder_args:
+  data_path: ./data/mtu100+/xsub/val_data_joint.npy
+  label_path: ./data/mtu100+/xsub/val_label.pkl
+  debug: False
+  random_choose: False
+  window_size: -1
+
+# model
+model: model.unik_detection.TAG
+model_args:
+  #weights: ./weights/weights-posetics.pt
+  #weights: 'no'
+  num_class: 65
+  num_joints: 17
+  num_person: 2
+  #backbone_fixed: False # True for linear classification
+  in_channels: 2
+  num_heads: 3
+  #tau: 300
+  
+#optim
+weight_decay: 0.0001
+base_lr: 0.001
+#step: [30, 40]
+optimizer: Adam
+# training
+device: [0, 1]
+batch_size: 16
+test_batch_size: 32
+num_epoch: 65
+nesterov: True
+

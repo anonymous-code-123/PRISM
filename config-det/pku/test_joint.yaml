@@ -1,0 +1,27 @@
+# feedebasbaseer
+feeder: feeders.feeder.Feeder
+test_feeder_args:
+  data_path: ./data/tsu/xsub/val_data_joint.npy
+  label_path: ./data/tsu/xsub/val_label.pkl
+  debug: False
+
+# model
+model: model.unik_detection.TAG
+model_args:
+  num_class: 51
+  num_joints: 17
+  num_person: 2
+  in_channels: 2
+  num_heads: 3
+  tau: 1
+  
+# test
+phase: test
+device: [0,1]
+test_batch_size: 2
+
+weights: runs/smarthomew-pdan-300/smarthome_cs_unik_joint-99-90600.pt
+work_dir: ./work_dir/smarthomew-pdan-300/xsub/unik_test_joint
+model_saved_name: ./runs/smarthomew-pdan-300/smarthome_cs_unik_test_joint
+save_score: True
+
